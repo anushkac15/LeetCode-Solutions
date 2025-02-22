@@ -1,30 +1,39 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
+
+
         int n = chars.size();
-        int index = 0; // Position to overwrite in chars
 
-        for (int i = 0; i < n; ) {
-            char currentChar = chars[i];
-            int count = 0;
+        int index =0;
+        int i=0;
 
-            // Count consecutive occurrences
-            while (i < n && chars[i] == currentChar) {
-                count++;
+        while(i < n){
+            char curr_char = chars[i];  
+            int cnt =0;
+
+            while(i<n && chars[i]==curr_char){
+                cnt+=1;
                 i++;
+
             }
+            chars[index]= curr_char;
+            index++;
 
-            // Store character
-            chars[index++] = currentChar;
+            if(cnt>1){
+                string cnt_str = to_string(cnt);
 
-            // Store count (if greater than 1)
-            if (count > 1) {
-                for (char c : to_string(count)) {
-                    chars[index++] = c;
+                for(char &ch: cnt_str){
+                    chars[index] = ch;
+                    index++;
                 }
             }
+
+
         }
 
-        return index; // New compressed size
+        return index;
+
+        
     }
 };
