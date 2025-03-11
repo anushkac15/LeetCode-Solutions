@@ -13,7 +13,7 @@ public:
         for(int j = 0;j<n;j++){
 
             if(isVowel(word[j])){
-                cnt += long(n-j) * long(j+1);
+                cnt += long(j+1)* long(n-j) ;
             }
         }
 
