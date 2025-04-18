@@ -1,11 +1,10 @@
 class Solution {
 public:
 
-    int solve(string& s, int i, int j, vector<vector<int>>& dp){
+    int solve(string&s , int i , int j, vector<vector<int>>&dp){
         if(i>j){
             return 0;
         }
-
         if(i==j){
             return 1;
         }
@@ -15,17 +14,21 @@ public:
         }
 
         if(s[i]==s[j]){
-            return dp[i][j] = solve(s, i+1, j-1, dp)+2;
+            return dp[i][j] = 2+solve(s, i+1, j-1,  dp);
         }
         else{
-            return dp[i][j] = max(solve(s, i+1, j, dp), solve(s, i, j-1, dp));
+            return dp[i][j] = max(solve(s, i+1, j,  dp), solve(s, i, j-1, dp));
         }
     }
     int minInsertions(string s) {
 
-        vector<vector<int>> dp(s.size()+1, vector<int>(s.size()+1, -1));
+        int n = s.size();
+        // string s1 = s;
+        // reverse(s1.begin(), s1.end());
 
-        return s.size() - solve(s, 0, s.size()-1, dp);
+
+        vector<vector<int>>dp(n+1, vector<int>(n+1, -1));
+        return n - solve(s, 0, n-1,  dp);
         
     }
 };
