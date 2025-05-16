@@ -1,7 +1,6 @@
 class Solution {
 public:
-    vector<string> getWordsInLongestSubsequence(vector<string>& words,
-                                                vector<int>& groups) {
+    vector<string> getWordsInLongestSubsequence(vector<string>& words,vector<int>& groups) {
         int n = groups.size();
         vector<int> dp(n, 1);
         vector<int> prev(n, -1);
