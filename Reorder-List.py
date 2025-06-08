@@ -14,17 +14,17 @@ class Solution:
 
         while slow and fast and fast.next:
             slow = slow.next 
-            fast= fast.next.next
+            fast = fast.next.next
 
-        node = None
-        second = slow.next
+        secondH = slow.next 
         slow.next = None
+        node = None
 
-        while second:
-            nextNode = second.next
-            second.next = node
-            node = second
-            second = nextNode
+        while secondH:
+            nextNode = secondH.next
+            secondH.next = node
+            node = secondH
+            secondH = nextNode
 
         first = head
         second = node
@@ -38,3 +38,13 @@ class Solution:
 
             first = temp1
             second = temp2
+
+            
+
+
+
+
+
+
+
+        
