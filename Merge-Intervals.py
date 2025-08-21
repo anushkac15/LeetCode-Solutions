@@ -3,11 +3,13 @@ class Solution:
 
         intervals.sort()
 
-        merged = []
-        for interval in intervals:
-            if not merged or merged[-1][1] < interval[0]:
-                merged.append(interval)
+        merged =[]
+
+        for i in intervals:
+
+            if not merged or  merged[-1][1] <i[0]:
+                merged.append(i)
             else:
-                merged[-1][1] = max(merged[-1][1], interval[1])
+                merged[-1][1] = max(merged[-1][1], i[1])
 
         return merged
