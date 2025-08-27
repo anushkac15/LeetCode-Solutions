@@ -31,6 +31,4 @@ class Solution:
             if minSum>currSum:
                 minSum = min(minSum, currSum)
 
-
-
         return max(maxSum,sum(nums)-minSum)
