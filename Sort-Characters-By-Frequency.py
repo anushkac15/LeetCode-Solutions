@@ -6,13 +6,15 @@ class Solution:
         for c in s:
             mp[c]+=1
 
-        key = sorted(mp, key = mp.get, reverse=True)
+        heap = []
 
-        res =""
+        for char, cnt in mp.items():
+            heapq.heappush(heap, (-cnt, char))
 
-        for i in range(len(key)):
-            res+= key[i]*mp[key[i]]
+        res = ""
+
+        while heap:
+            cnt, char = heapq.heappop(heap)
+            res+= (-cnt)*char
 
         return res
-
-        
