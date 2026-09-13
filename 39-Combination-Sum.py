@@ -1,21 +1,23 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        res = []
         
-        def solve(start:int, temp:List[int], rem:int):
-            if rem==0:
-                res.append(temp.copy())
-                return
-            
-            if rem<0:
-                return 
+        def solve(i, target, res, temp):
 
-            if start<len(candidates):
-                temp.append(candidates[start])
-                solve(start,temp, rem - candidates[start])
+            if target==0:
+                res.append(temp[:])
+                return res
+
+            if i==len(candidates) or target<0:
+                return 0
+
+            if candidates[i] <= target:
+                temp.append(candidates[i])
+                solve(i, target-candidates[i], res, temp)
                 temp.pop()
-                solve(start+1, temp, rem)
 
-        temp = []
-        solve(0,temp,target)
+            solve(i+1, target, res, temp)
+
+        res = []
+        solve(0, target, res, [])
         return res
+
