@@ -4,15 +4,13 @@ class Solution:
         maxi = float('-inf')
         sum =0
 
-        for i in range(len(nums)):
+        for n in nums:
 
             if sum<0:
                 sum =0
 
-            sum+=nums[i]
-
+            sum+=n
             maxi = max(maxi, sum)
 
         return maxi
-
         
