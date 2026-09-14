@@ -1,22 +1,24 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
 
-        def solve(n,dp):
-            if n<0:
-                return 0
+        def solve(i, dp):
 
-            if n==0 or n==1 or n==2:
-                return n
+            if i<0:
+                return 
+            
+            if i==0 or i==1 or i==2:
+                return i
 
-            if dp[n]!=-1:
-                return dp[n]
+            if dp[i] !=-1:
+                return dp[i]
 
-            step1 = solve(n-2, dp)
-            step2 = solve(n-1,dp)
+            step1 = solve(i-1, dp)
+            step2 = solve(i-2, dp)
 
-            dp[n] = step1 +step2 
-            return dp[n]
+            dp[i] = step1 +step2
+            return dp[i]
 
-        dp = [-1] *(n+1)
-        return solve(n,dp)
-        
+        dp = [-1] * (n+1)
+        return solve(n, dp)
+
+            
