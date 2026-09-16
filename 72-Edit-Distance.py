@@ -1,18 +1,28 @@
 class Solution:
-    def minDistance(self, s1: str, s2: str) -> int:
-        m, n = len(s1), len(s2)
-        dp, dpPrev = [-1] * (n+1), [-1] * (n+1)
+    def minDistance(self, word1: str, word2: str) -> int:
 
-        for i in range(m+1):
-            for j in range(n+1):
-                if i == 0:
-                    dp[j] = j  
-                elif j == 0:
-                    dp[j] = i 
-                elif s1[i-1] == s2[j-1]:
-                    dp[j] = dpPrev[j-1]
-                else:
-                    dp[j] = min(dpPrev[j], dp[j-1], dpPrev[j-1]) + 1
-            dp, dpPrev = dpPrev, dp
-            
-        return dpPrev[n]
+        def solve(i, j, dp):
+
+            if i < 0:
+                return j + 1
+
+            if j < 0:
+                return i + 1
+
+            if dp[i][j] != -1:
+                return dp[i][j]
+
+            if word1[i] == word2[j]:
+                dp[i][j] = solve(i - 1, j - 1, dp)
+                return dp[i][j]
+
+            insert = solve(i, j - 1, dp)
+            delete = solve(i - 1, j, dp)
+            replace = solve(i - 1, j - 1, dp)
+
+            dp[i][j] = 1 + min(insert, min(delete, replace))
+
+            return dp[i][j]
+
+        dp = [[-1] * len(word2) for _ in range(len(word1))]
+        return solve(len(word1) - 1, len(word2) - 1, dp)
