@@ -1,22 +1,18 @@
 class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:
+    def longestConsecutive(self, nums: list[int]) -> int:
 
-        if not nums:
-            return 0
         st = set(nums)
-        ConseCnt= 0
+        res = 0
 
-        for num in st:
+        for n in st:
 
-            if num-1 not in st:
-                
-                curr = num
-                currCnt =1
+            if n - 1 not in st:  # this gives the starting of sequence
+                len = 1
 
-                while curr+1 in st:
-                    curr +=1
-                    currCnt+=1
+                while n + 1 in st:
+                    n += 1
+                    len += 1
 
-                ConseCnt = max(currCnt,ConseCnt)
+                res = max(res, len)
 
-        return ConseCnt
+        return res
