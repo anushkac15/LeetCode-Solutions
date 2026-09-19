@@ -1,51 +1,39 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
 
-        m = len(s)
-        n = len(t)
-
-        if m < n:
+        if len(s) < len(t):
             return ""
-
-        hashArr = [0] * 128
-
-        for i in range(n):
-            hashArr[ord(t[i])] += 1
 
         l = 0
         r = 0
+        cnt = len(t)
+        minLen = float("inf")
+        minStart = 0
+        mp = defaultdict(int)
 
-        ct = 0
-        minLen = float('inf')
-        sIndex = -1
+        for ch in t:
+            mp[ch] += 1
 
-        while r < m:
+        while r < len(s):
 
-            rightChar = s[r]
+            if mp[s[r]] > 0:
+                cnt -= 1
 
-            if hashArr[ord(rightChar)] > 0:
-                ct += 1
+            mp[s[r]] -= 1
 
-            hashArr[ord(rightChar)] -= 1
+            while cnt == 0:
 
-            while ct == n:
-
-                if r - l + 1 < minLen:
+                if minLen > r - l + 1:
                     minLen = r - l + 1
-                    sIndex = l
+                    minStart = l
 
-                leftChar = s[l]
+                mp[s[l]] += 1
 
-                hashArr[ord(leftChar)] += 1
-
-                if hashArr[ord(leftChar)] > 0:
-                    ct -= 1
+                if mp[s[l]] > 0:
+                    cnt += 1
 
                 l += 1
 
             r += 1
 
-        if sIndex == -1:
-            return ""
-
-        return s[sIndex:sIndex + minLen]
+        return "" if minLen == float("inf") else s[minStart : minStart + minLen]
