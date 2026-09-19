@@ -1,9 +1,9 @@
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+    def maxSlidingWindow(self, nums: list[int], k: int) -> list[int]:
 
         q = deque()
-        res = []
         l = 0
+        res = []
 
         for r in range(len(nums)):
 
