@@ -4,14 +4,15 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        
-        node = ListNode()
-        res = node
+    def mergeTwoLists(
+        self, list1: ListNode | None, list2: ListNode | None
+    ) -> ListNode | None:
+
+        dummy = ListNode()
+        res = dummy
 
         while list1 and list2:
-
-            if list1.val <list2.val:
+            if list1.val < list2.val:
                 res.next = list1
                 list1 = list1.next
 
@@ -21,11 +22,14 @@ class Solution:
 
             res = res.next
 
-        if list1:
+        while list1:
             res.next = list1
-        else:
+            list1 = list1.next
+            res = res.next
+
+        while list2:
             res.next = list2
+            list2 = list2.next
+            res = res.next
 
-        return node.next
-
-        
+        return dummy.next
