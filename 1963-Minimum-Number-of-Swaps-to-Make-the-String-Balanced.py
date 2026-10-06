@@ -1,10 +1,12 @@
 class Solution:
     def minSwaps(self, s: str) -> int:
-        ans =0
+
+        open = 0
+
         for ch in s:
-            if ch == '[':
-                ans+=1
-            elif ans>0:
-                ans-=1
-        return (ans+1)//2
-        
+            if ch == "[":
+                open += 1
+            elif open > 0:
+                open -= 1
+
+        return (open + 1) // 2
