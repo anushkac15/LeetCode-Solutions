@@ -1,15 +1,15 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
 
-        if len(s) < len(t):
+        if len(t) > len(s):
             return ""
 
         l = 0
         r = 0
         cnt = len(t)
-        minLen = float("inf")
-        minStart = 0
         mp = defaultdict(int)
+        minlen = float("inf")
+        minStart = 0
 
         for ch in t:
             mp[ch] += 1
@@ -23,8 +23,8 @@ class Solution:
 
             while cnt == 0:
 
-                if minLen > r - l + 1:
-                    minLen = r - l + 1
+                if minlen > (r - l + 1):
+                    minlen = min(minlen, r - l + 1)
                     minStart = l
 
                 mp[s[l]] += 1
@@ -36,4 +36,4 @@ class Solution:
 
             r += 1
 
-        return "" if minLen == float("inf") else s[minStart : minStart + minLen]
+        return "" if minlen == float("inf") else s[minStart : minlen + minStart]
